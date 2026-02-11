@@ -10,6 +10,8 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
+        // JitPack is needed for some libraries if they are not in mavenCentral
+        maven { url 'https://jitpack.io' }
     }
 }
 rootProject.name = "Hablando Claro VIP"
