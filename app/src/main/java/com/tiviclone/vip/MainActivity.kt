@@ -25,6 +25,8 @@ import androidx.media3.common.MediaItem
 import androidx.media3.common.PlaybackException
 import androidx.media3.common.Player
 import androidx.media3.exoplayer.ExoPlayer
+import androidx.media3.exoplayer.DefaultLoadControl
+import androidx.media3.exoplayer.DefaultRenderersFactory
 import androidx.media3.datasource.okhttp.OkHttpDataSource
 import androidx.media3.ui.PlayerView
 import com.bumptech.glide.Glide
@@ -117,7 +119,23 @@ class MainActivity : AppCompatActivity() {
             .build()
 
         val dataSourceFactory = OkHttpDataSource.Factory(okHttpClient)
-        player = ExoPlayer.Builder(this)
+
+        // TiviMate LoadControl Configuration (30s, 60s, 2.5s, 5s)
+        val loadControl = DefaultLoadControl.Builder()
+            .setBufferDurationsMs(
+                30000, // Min buffer
+                60000, // Max buffer
+                2500,  // Buffer for playback
+                5000   // Buffer for playback after rebuffer
+            )
+            .build()
+
+        // TiviMate RenderersFactory Configuration (Prefer Extension/FFmpeg)
+        val renderersFactory = DefaultRenderersFactory(this)
+            .setExtensionRendererMode(DefaultRenderersFactory.EXTENSION_RENDERER_MODE_PREFER)
+
+        player = ExoPlayer.Builder(this, renderersFactory)
+            .setLoadControl(loadControl)
             .setMediaSourceFactory(androidx.media3.exoplayer.source.DefaultMediaSourceFactory(dataSourceFactory))
             .build()
         playerView.player = player

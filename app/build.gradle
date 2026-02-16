@@ -11,8 +11,8 @@ android {
         applicationId "com.tiviclone.vip"
         minSdk 21
         targetSdk 34
-        versionCode 78
-        versionName "1.78"
+        versionCode 111
+        versionName "1.111-TiviMateCore"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -45,6 +45,7 @@ dependencies {
     implementation 'androidx.media3:media3-exoplayer:1.2.1'
     implementation 'androidx.media3:media3-ui:1.2.1'
     implementation 'androidx.media3:media3-datasource-okhttp:1.2.1'
+    implementation 'androidx.media3:media3-decoder-ffmpeg:1.2.1'
     
     // Glide for images
     implementation 'com.github.bumptech.glide:glide:4.16.0'
